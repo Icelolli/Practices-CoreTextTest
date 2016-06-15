@@ -2,7 +2,7 @@
   "type" : "img",
   "width" : 200,
   "height" : 108,
-  "name" : "coretext-image-1.jpg"
+  "name" : "coretext-image-1.png"
   },
   { "color" : "blue",
   "content" : " 更进一步地，实际工作中，我们更希望通过一个排版文件，来设置需要排版的文字的 ",
@@ -23,7 +23,7 @@
   "type" : "img",
   "width" : 200,
   "height" : 130,
-  "name" : "coretext-image-2.jpg"
+  "name" : "coretext-image-2.png"
   },
   {
     "color" : "default",

@@ -14,7 +14,7 @@ class CoreTextData: NSObject {
     var height : CGFloat = 0
     var imageArray : Array<CoreTextImageData> = Array<CoreTextImageData>() {
         didSet (newImageArray){
-            
+           fillImagePosition()
         }
     }
     
@@ -30,18 +30,22 @@ class CoreTextData: NSObject {
         
         let lines : NSArray = CTFrameGetLines(self.ctFrame!)
         let lineCount = lines.count
-        var lineOrigins = UnsafeMutablePointer<CGPoint>.alloc(lineCount)
+        let lineOrigins = UnsafeMutablePointer<CGPoint>.alloc(lineCount)
         CTFrameGetLineOrigins(self.ctFrame!, CFRangeMake(0, 0), lineOrigins)
         
         var imgIndex : Int = 0
         var imageData : CoreTextImageData? = self.imageArray[0]
-        for var index = 0 ; index < lineCount ; ++index {
+        for index in 0  ..< lineCount  {
+            guard imageData != nil
+                else {
+                 return
+                }
             let line : CTLineRef = lines[0] as! CTLineRef
             let runObjArray : NSArray = CTLineGetGlyphRuns(line)
             for runObj in runObjArray  {
                 let run = runObj as! CTRunRef
                 let runAttributes : NSDictionary = CTRunGetAttributes(run)
-                let delegate = runAttributes["kCTRunDelegateAttributeName"] as! CTRunDelegateRef?
+                let delegate = runAttributes[String(kCTRunDelegateAttributeName)] as! CTRunDelegateRef?
                 if delegate == nil {
                     continue
                 }
@@ -56,10 +60,10 @@ class CoreTextData: NSObject {
                 }
                 
                 var runBounds : CGRect
-                let ascent : CGFloat = 0
-                let descent : CGFloat = 0
+                var ascent : CGFloat = 0
+                var descent : CGFloat = 0
                 runBounds = CGRect()
-                runBounds.size.width = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), nil, nil, nil))
+                runBounds.size.width = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, nil))
                 runBounds.size.height = ascent + descent
                 
                 let xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, nil)
@@ -73,7 +77,7 @@ class CoreTextData: NSObject {
                 let delegateBounds = CGRectOffset(runBounds, colRect.origin.x, colRect.origin.y)
                 
                 imageData!.imagePosition = delegateBounds
-                imgIndex++
+                imgIndex += 1
                 if imgIndex == self.imageArray.count {
                     imageData = nil
                     break

@@ -58,6 +58,11 @@ class CTDisplayView: UIView,UIGestureRecognizerDelegate{
         
         if (self.data != nil) {
             CTFrameDraw((self.data?.ctFrame)!, context)
+            
+            for imageData in self.data!.imageArray {
+                let image =  UIImage(named: imageData.name!)?.CGImage
+                CGContextDrawImage(context, imageData.imagePosition, image!)
+            }
         }
     }
     

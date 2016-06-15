@@ -196,7 +196,7 @@ class CTFrameParser: NSObject {
     
     
     
-    class func parseImageDataFromNSDictionary(var dict:[String:AnyObject],config:CTConfigure) -> NSAttributedString {
+    class func parseImageDataFromNSDictionary(dict:[String:AnyObject],config:CTConfigure) -> NSAttributedString {
         
         var callbacks = CTRunDelegateCallbacks(version: kCTRunDelegateVersion1,
                                                 dealloc: deallocCallBack,
@@ -204,21 +204,12 @@ class CTFrameParser: NSObject {
                                                 getDescent: descentCallback,
                                                 getWidth: widthCallback)
         
-        let dictMPointer = withUnsafeMutablePointer(&dict) {UnsafeMutablePointer<[String:AnyObject]>($0)}
+        let dicM = NSDictionary(dictionary: dict);
+        let dictPointer = UnsafeMutablePointer<NSDictionary>(Unmanaged.passRetained(dicM).toOpaque());
         let funcPointer = withUnsafePointer(&callbacks) {UnsafePointer<CTRunDelegateCallbacks>($0)}
         
-        let dict22 : [String : AnyObject] = UnsafePointer<[String : AnyObject]>(dictMPointer).memory
-//        var intPtr = unsafeBitCast(voidPtr, UnsafePointer<Int>.self)
-//        intPtr.memory //100
-        
-//        if let dict : [String:AnyObject] = unsafeBitCast(dictMPointer, [String:AnyObject].self) {
-//            //        if let height = dict["height"]?.floatValue {
-//            //            return CGFloat(height)
-//            //        }
-//        }
-        
         // CTRunDelegateCreate的第二个参数会作为每一个回调调用时的入参
-        let delegate : CTRunDelegateRef? = CTRunDelegateCreate(funcPointer, dictMPointer)
+        let delegate : CTRunDelegateRef? = CTRunDelegateCreate(funcPointer, dictPointer)
         let replaceChar = 0xFFFC
         let content = String(replaceChar)
         let attributes : Dictionary = self.attributesWithConfig(config)
@@ -250,15 +241,15 @@ class CTFrameParser: NSObject {
 }
 
 func deallocCallBack(ref : UnsafeMutablePointer<Void>) -> Void {
-    
+    Unmanaged<NSDictionary>.fromOpaque(COpaquePointer(ref)).release()
 }
 
 func ascentCallback(ref : UnsafeMutablePointer<Void>) -> CGFloat {
-//    if ref == nil {return 0}
-//    let dict : [String : AnyObject] = UnsafePointer<[String : AnyObject]>(ref).memory
-//    if let height = dict["height"]?.floatValue {
-//        return CGFloat(height)
-//    }
+    if ref == nil {return 0}
+    let dict = Unmanaged<NSDictionary>.fromOpaque(COpaquePointer(ref)).takeUnretainedValue()
+    if let height = dict["height"]?.floatValue {
+        return CGFloat(height)
+    }
     return 0
 }
 
@@ -267,10 +258,10 @@ func descentCallback(ref : UnsafeMutablePointer<Void>) -> CGFloat {
 }
 
 func widthCallback(ref : UnsafeMutablePointer<Void>) -> CGFloat {
-//    if ref == nil {return 0}
-//    let dict : [String : AnyObject] = UnsafePointer<[String : AnyObject]>(ref).memory
-//    if let width = dict["width"]?.floatValue {
-//        return CGFloat(width)
-//    }
+    if ref == nil {return 0}
+    let dict = Unmanaged<NSDictionary>.fromOpaque(COpaquePointer(ref)).takeUnretainedValue()
+    if let width = dict["width"]?.floatValue {
+        return CGFloat(width)
+    }
     return 0
 }

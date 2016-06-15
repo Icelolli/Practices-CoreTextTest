@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29959A1B1D110744008D6EA2 /* coretext-image-1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29959A1A1D110744008D6EA2 /* coretext-image-1@3x.png */; };
+		29959A1D1D11075D008D6EA2 /* coretext-image-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29959A1C1D11075D008D6EA2 /* coretext-image-2@2x.png */; };
 		7A81272D1B955425003B760B /* CoreTextImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A81272C1B955425003B760B /* CoreTextImageData.swift */; };
 		7AEC75A91B94020C001633D2 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 7AF48F4C1B8F16FD002E70A3 /* data.json */; };
 		7AF257791B957DDD0023EA8C /* CoreTextLinkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF257781B957DDD0023EA8C /* CoreTextLinkData.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		29959A1A1D110744008D6EA2 /* coretext-image-1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coretext-image-1@3x.png"; sourceTree = "<group>"; };
+		29959A1C1D11075D008D6EA2 /* coretext-image-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coretext-image-2@2x.png"; sourceTree = "<group>"; };
 		7A81272C1B955425003B760B /* CoreTextImageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextImageData.swift; sourceTree = "<group>"; };
 		7AF257781B957DDD0023EA8C /* CoreTextLinkData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextLinkData.swift; sourceTree = "<group>"; };
 		7AF48F461B8EE512002E70A3 /* CTFrameParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTFrameParser.swift; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				7AF48F4A1B8EE5D6002E70A3 /* CTConfigure.swift */,
 				7AF48F481B8EE54C002E70A3 /* CoreTextData.swift */,
 				7AF257781B957DDD0023EA8C /* CoreTextLinkData.swift */,
+				29959A1A1D110744008D6EA2 /* coretext-image-1@3x.png */,
+				29959A1C1D11075D008D6EA2 /* coretext-image-2@2x.png */,
 				7AFFCED01B8EBD8400B4B930 /* Main.storyboard */,
 				7AFFCED31B8EBD8400B4B930 /* Assets.xcassets */,
 				7AFFCED51B8EBD8400B4B930 /* LaunchScreen.storyboard */,
@@ -257,6 +263,8 @@
 				7AFFCED41B8EBD8400B4B930 /* Assets.xcassets in Resources */,
 				7AFFCED21B8EBD8400B4B930 /* Main.storyboard in Resources */,
 				7AEC75A91B94020C001633D2 /* data.json in Resources */,
+				29959A1B1D110744008D6EA2 /* coretext-image-1@3x.png in Resources */,
+				29959A1D1D11075D008D6EA2 /* coretext-image-2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
